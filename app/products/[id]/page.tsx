@@ -12,14 +12,15 @@ import { GetServerSideProps } from "next";
 
 
 type Props ={
-    params:{id:string;};
+    params:{id:string;}
 }
 
 
-const ProductDetails = async ({ params }: Props) =>{
-    const {id} = params;
+const ProductDetails = async ({ params:{id} }: Props) =>{
+    // const { id } = await params
+    
 
-    const product = await getProductById(id);
+    const product:Product = await getProductById(id);
 
     if(!product) redirect('/')
 
