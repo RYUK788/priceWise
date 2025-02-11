@@ -11,17 +11,15 @@ import React from "react";
 
 
 
-type PageProps ={
-    params:{id:string;}
-}
 
 
-const ProductDetails = async ({params:{id}}:PageProps) =>{
-    const product = await getProductById(id);
+
+const ProductDetails = async ({ params }: { params: { id: string } }) =>{
+    const product = await getProductById(params.id);
 
     if(!product) redirect('/')
 
-    const similarProducts = await getSimilarProducts(id);
+    const similarProducts = await getSimilarProducts(params.id);
     const actualBuyers = product.reviewsCount;
    
 
@@ -158,7 +156,7 @@ const ProductDetails = async ({params:{id}}:PageProps) =>{
                         </div>
 
                         <Modal 
-                             productId={id}
+                             productId={params.id}
                          />
                 </div>
             </div>
