@@ -15,12 +15,12 @@ import React from "react";
 
 
 const ProductDetails = async ({ params }: { params: { id: string } }) =>{
-    const product = await getProductById(params.id);
+    const product:Product = await getProductById(params.id);
 
     if(!product) redirect('/')
 
     const similarProducts = await getSimilarProducts(params.id);
-    const actualBuyers = product.reviewsCount;
+    
    
 
     return (
@@ -121,7 +121,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) =>{
                                 </div>
                                 
                                 <p className="text-sm text-black opacity-50">
-                                    <span className="text-primary-green font-semibold">{actualBuyers}+</span> of buyers have recommended this.
+                                    <span className="text-primary-green font-semibold">100+</span> of buyers have recommended this.
                                 </p>
                             </div>
                         </div>
