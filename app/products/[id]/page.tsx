@@ -8,20 +8,38 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
-
+import { GetServerSideProps } from "next";
 
 
 type Props ={
-    params:{id:string;}
+    params:{id:string;};
 }
 
 
-const ProductDetails = async ({params}:Props) =>{
-    const {id} = params;
+const ProductDetails = async ({ params }: Props) =>{
+    // const {id} = params;
 
-    const product = await getProductById(id);
+    // const product = await getProductById(id);
 
-    if(!product) redirect('/')
+    // if(!product) redirect('/')
+
+    if (!params || !params.id) {
+        console.error("No product ID found in params.");
+        redirect("/");
+        return null;
+      }
+    const id = params.id;
+
+    try {
+        const product = await getProductById(id);
+        if (!product) {
+          console.error(`Product not found: ${id}`);
+          redirect("/");
+          return null;
+        }
+
+
+        
 
     const similarProducts = await getSimilarProducts(id);
     const actualBuyers = product.reviewsCount;
@@ -212,5 +230,11 @@ const ProductDetails = async ({params}:Props) =>{
         </div>
     )
 }
+catch (error) {
+    console.error("Error fetching product:", error);
+    redirect("/");
+    return null;
+  }
+};
 
 export default ProductDetails
