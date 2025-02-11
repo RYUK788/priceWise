@@ -51,50 +51,50 @@ export async function scrapeAmazonProduct(url:string){
 
         const discountRate = $(".savingsPercentage").text().replace(/[-%]/g,"");
 
-        const breadcrumb = $("#wayfinding-breadcrumbs_feature_div .a-breadcrumb")
-        .text()
-        .trim()
-        .split(">")
-        .map((category) => category.trim())
-        .filter((category) => category.length > 0);
+        // const breadcrumb = $("#wayfinding-breadcrumbs_feature_div .a-breadcrumb")
+        // .text()
+        // .trim()
+        // .split(">")
+        // .map((category) => category.trim())
+        // .filter((category) => category.length > 0);
     
-        let category = breadcrumb.length > 0 ? breadcrumb[breadcrumb.length - 1] : "Unknown";
-            if (!category || category === "Unknown") {
-            const altBreadcrumb = $(".a-breadcrumb span.a-list-item")
-            .map((_, element) => $(element).text().trim())
-            .get()
-            .filter((category) => category.length > 0);
+        // let category = breadcrumb.length > 0 ? breadcrumb[breadcrumb.length - 1] : "Unknown";
+        //     if (!category || category === "Unknown") {
+        //     const altBreadcrumb = $(".a-breadcrumb span.a-list-item")
+        //     .map((_, element) => $(element).text().trim())
+        //     .get()
+        //     .filter((category) => category.length > 0);
 
-        category = altBreadcrumb.length > 0 ? altBreadcrumb[altBreadcrumb.length - 1] : "Unknown";
-        }
+        // category = altBreadcrumb.length > 0 ? altBreadcrumb[altBreadcrumb.length - 1] : "Unknown";
+        // }
 
    
 
 
 
-        const extractDescription = ($: cheerio.CheerioAPI): string => {
-            let description = $("#productDescription").text().trim();
+        // const extractDescription = ($: cheerio.CheerioAPI): string => {
+        //     let description = $("#productDescription").text().trim();
 
-            if (!description) {
-                description = $("#feature-bullets ul li span")
-                    .map((_, el) => $(el).text().trim())
-                    .get()
-                    .join(" ");
-            }
-
-            
-            description = description.replace(
-                /(Sort by reviews type|Verified Purchase|Helpful Report|Top reviews|Most recent)/gi,
-                ""
-            );
+        //     if (!description) {
+        //         description = $("#feature-bullets ul li span")
+        //             .map((_, el) => $(el).text().trim())
+        //             .get()
+        //             .join(" ");
+        //     }
 
             
-            description = description.replace(/\s{2,}/g, " ").trim();
+        //     description = description.replace(
+        //         /(Sort by reviews type|Verified Purchase|Helpful Report|Top reviews|Most recent)/gi,
+        //         ""
+        //     );
+
+            
+        //     description = description.replace(/\s{2,}/g, " ").trim();
 
           
-            // const words = description.split(/\s+/);
-            return description;
-        };
+        //     // const words = description.split(/\s+/);
+        //     return description;
+        // };
 
         const description = extractDescription($);
 
@@ -114,9 +114,9 @@ export async function scrapeAmazonProduct(url:string){
             originalPrice : Number(originalPrice) || Number(currentPrice),
             priceHistory : [],
             discountRate : Number(discountRate),
-            category,
+            category:"category",
             reviewsCount:100,
-            stars:parsedStarRating ,
+            stars:4.5 ,
             isOutOfStock : outOfStock,
             description,
             lowestPrice: Number(currentPrice) || Number(originalPrice),
