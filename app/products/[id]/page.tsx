@@ -11,16 +11,20 @@ import React from "react";
 
 
 
+type Props ={
+    params:{id:string;}
+}
 
 
+const ProductDetails = async ({params}:Props) =>{
+    const {id} = params;
 
-const ProductDetails = async ({ params }: { params: { id: string } }) =>{
-    const product:Product = await getProductById(params.id);
+    const product = await getProductById(id);
 
     if(!product) redirect('/')
 
-    const similarProducts = await getSimilarProducts(params.id);
-    
+    const similarProducts = await getSimilarProducts(id);
+    const actualBuyers = product.reviewsCount;
    
 
     return (
@@ -121,7 +125,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) =>{
                                 </div>
                                 
                                 <p className="text-sm text-black opacity-50">
-                                    <span className="text-primary-green font-semibold">100+</span> of buyers have recommended this.
+                                    <span className="text-primary-green font-semibold">{actualBuyers}+</span> of buyers have recommended this.
                                 </p>
                             </div>
                         </div>
@@ -156,7 +160,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) =>{
                         </div>
 
                         <Modal 
-                             productId={params.id}
+                             productId={id}
                          />
                 </div>
             </div>
