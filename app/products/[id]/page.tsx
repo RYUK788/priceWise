@@ -8,16 +8,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
-import { GetServerSideProps } from "next";
+
 
 
 type Props ={
-    params:{id:string;}
+    params: Promise<{
+        id: string;
+    }>
 }
 
 
-const ProductDetails = async ({ params:{id} }: Props) =>{
-    // const { id } = await params
+const ProductDetails = async ({ params }: Props) =>{
+    const { id } = await params;
     
 
     const product:Product = await getProductById(id);
