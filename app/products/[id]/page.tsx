@@ -128,7 +128,7 @@ const ProductDetails = async ({ params }: Props) =>{
                                 </div>
                                 
                                 <p className="text-sm text-black opacity-50">
-                                    <span className="text-primary-green font-semibold">{actualBuyers}+</span> of buyers have recommended this.
+                                    <span className="text-primary-green font-semibold">{actualBuyers || 100}+</span> of buyers have recommended this.
                                 </p>
                             </div>
                         </div>
