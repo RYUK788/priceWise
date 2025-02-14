@@ -1,6 +1,7 @@
 import Modal from "@/components/Modal";
 import PriceInfoCard from "@/components/PriceInfoCard";
 import ProductCard from "@/components/ProductCard";
+import ShareButton from "@/components/ShareButton";
 import { getProductById, getSimilarProducts } from "@/lib/actions";
 import { formatNumber } from "@/lib/utils";
 import { Product } from "@/types";
@@ -86,12 +87,7 @@ const ProductDetails = async ({ params }: Props) =>{
                             </div>
 
                             <div className ="p-2 bg-white-200 rounded-10">
-                             <Image
-                                src="/assets/icons/share.svg"
-                                alt="share"
-                                width={20}
-                                height={20}
-                             />
+                            <ShareButton url={product.url} /> 
                             </div>
                         </div>                      
                     </div>
